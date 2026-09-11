@@ -1,16 +1,13 @@
 import { useRef, useState } from 'react'
-import { useFrame } from '@react-three/fiber'
+import { useFrame, useThree } from '@react-three/fiber'
 import { Float, Html } from '@react-three/drei'
 import type { Group } from 'three'
 import { Scene } from './index'
 import { GRADES, LEVEL_COLOR, levelOf } from '../data/curriculum'
 
-function GradePod({ g, i, onPick, label }: { g: string; i: number; onPick: () => void; label: string }) {
+function GradePod({ g, pos, onPick, label }: { g: string; pos: [number, number, number]; onPick: () => void; label: string }) {
   const ref = useRef<Group>(null)
   const [hover, setHover] = useState(false)
-  const a = ((i - 6) / 12) * Math.PI * 1.1
-  const R = 9
-  const pos: [number, number, number] = [Math.sin(a) * R, 0, -Math.cos(a) * R + 6]
   useFrame((_, dt) => {
     if (!ref.current) return
     const s = hover ? 1.25 : 1
@@ -31,12 +28,28 @@ function GradePod({ g, i, onPick, label }: { g: string; i: number; onPick: () =>
   )
 }
 
-/** Home page "campus": 13 grade pods on an arc. */
-export default function Campus({ label, onPick, hint }: { label: (g: string) => string; onPick: (g: string) => void; hint: string }) {
+/** Landscape: pods on an arc. Portrait (phones): a path receding into the distance, KG nearest. */
+function Pods({ label, onPick }: { label: (g: string) => string; onPick: (g: string) => void }) {
+  const { width, height } = useThree((s) => s.size)
+  const portrait = width < height
   return (
-    <Scene camera={[0, 5, 14]} hint={hint}>
-      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.3, 2]}><circleGeometry args={[14, 64]} /><meshStandardMaterial color="#10173a" /></mesh>
-      {GRADES.map((g, i) => <GradePod key={g} g={g} i={i} label={label(g)} onPick={() => onPick(g)} />)}
+    <>
+      {GRADES.map((g, i) => {
+        let pos: [number, number, number]
+        if (portrait) pos = [i % 2 ? 1.6 : -1.6, 0, 5 - i * 1.8]
+        else { const a = ((i - 6) / 12) * Math.PI * 1.1; pos = [Math.sin(a) * 9, 0, -Math.cos(a) * 9 + 6] }
+        return <GradePod key={g} g={g} pos={pos} label={label(g)} onPick={() => onPick(g)} />
+      })}
+    </>
+  )
+}
+
+export default function Campus({ label, onPick, hint }: { label: (g: string) => string; onPick: (g: string) => void; hint: string }) {
+  const portrait = typeof window !== 'undefined' && window.innerWidth < window.innerHeight
+  return (
+    <Scene camera={portrait ? [0, 7, 12] : [0, 5, 14]} target={portrait ? [0, 0, -5] : [0, 0, 0]} hint={hint}>
+      <mesh rotation={[-Math.PI / 2, 0, 0]} position={[0, -0.3, portrait ? -6 : 2]}><circleGeometry args={[16, 64]} /><meshStandardMaterial color="#10173a" /></mesh>
+      <Pods label={label} onPick={onPick} />
     </Scene>
   )
 }

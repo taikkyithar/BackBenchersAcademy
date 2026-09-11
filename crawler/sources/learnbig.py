@@ -40,8 +40,10 @@ def _book(args):
         return None
     t = re.search(r'<meta property="og:title" content="([^"]*)"', h) or re.search(r"<title>([^<]*)", h)
     title = html.unescape(t.group(1)).replace(" | LearnBig", "").strip() if t else url
+    og = re.search(r'<meta property="og:image" content="([^"]+)"', h)
     return {"source": NAME, "source_page": url, "url": pdfs[0], "drive_id": None, "title": title,
             "filename": pdfs[0].rsplit("/", 1)[-1], "bytes": None, "link_text": None, "section": None,
+            "cover_url": html.unescape(og.group(1)) if og else None,
             "grade_hint": "KG" if cat == "kindergarten" else cat.replace("grade", "")}
 
 

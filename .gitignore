@@ -2,6 +2,7 @@
 data/pdf/
 data/text/
 data/pages/
+!data/covers/
 *.part
 # python
 __pycache__/
@@ -16,3 +17,4 @@ web/.vite/
 .idea/
 .vscode/
 web/public/data/
+web/public/covers/

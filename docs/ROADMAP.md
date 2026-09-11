@@ -6,7 +6,8 @@
 - [ ] Download the full preferred set (~8 GB) on a machine with space; publish `data/manifest.json` hashes
 - [ ] Human review of the 26 `needs_review` entries (editions vs volumes), fill missing subjects (G8–9 arts/PE/life-skills, G11–12 geography/history teacher guides)
 - [ ] Mirror the corpus somewhere with CORS + range requests (Internet Archive item or Cloudflare R2) so the in-app reader works everywhere
-- [ ] `pdftotext` extraction → per-chapter text + table of contents for every book (feeds lesson authoring and search)
+- [ ] **OCR pipeline** — the MoE PDFs are pure image scans (JPX/JPEG pages, no fonts, `pdftotext` returns nothing). Use Tesseract `mya` (+`eng`) via `ocrmypdf` to add a text layer, then extract per-chapter text + table of contents for every book (feeds lesson authoring, search, and `textbook_ref.chapter` in lessons)
+- [ ] Mobile-optimized editions: re-encode scans (150 dpi JPX → ~100 dpi JPEG/MRC) so a Grade 10 textbook is ~5 MB instead of 20–350 MB
 
 ## Phase 1 — Web platform MVP
 - [x] Vite + React + R3F scaffold, Burmese/English UI, 3D campus → grade → subject → book

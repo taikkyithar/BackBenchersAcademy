@@ -1,6 +1,6 @@
 // Copies the catalog and lesson content into web/public/data so the site is fully static.
 // Runs automatically before `npm run dev` / `npm run build` in web/.
-import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync, readdirSync, statSync, existsSync, cpSync } from 'node:fs'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
@@ -9,8 +9,16 @@ const out = join(root, 'web', 'public', 'data')
 mkdirSync(join(out, 'lessons'), { recursive: true })
 
 const cat = JSON.parse(readFileSync(join(root, 'catalog', 'catalog.json'), 'utf8'))
-const entries = cat.entries.filter((e) => !e.off_curriculum)
+const coversDir = join(root, 'data', 'covers')
+if (existsSync(coversDir)) cpSync(coversDir, join(root, 'web', 'public', 'covers'), { recursive: true })
+let localCovers = 0
+const entries = cat.entries.filter((e) => !e.off_curriculum).map((e) => {
+  const local = existsSync(join(coversDir, `${e.id}.jpg`))
+  if (local) localCovers++
+  return { ...e, cover: local ? `covers/${e.id}.jpg` : e.cover_url ?? null }
+})
 writeFileSync(join(out, 'catalog.json'), JSON.stringify({ version: cat.version, generated: new Date().toISOString(), entries }))
+console.log(`covers: ${localCovers} rendered locally, ${entries.filter((e) => e.cover && !e.cover.startsWith('covers/')).length} external`)
 
 function walk(dir) {
   let found = []

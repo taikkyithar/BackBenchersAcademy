@@ -5,6 +5,7 @@ export type CatalogFile = { source: string; source_page: string; url: string; dr
 export type Entry = {
   id: string; grade: string; subject: string; subject_label: string; kind: string; part: number | null
   curriculum: 'new' | 'old'; language: string; publisher: string; off_curriculum: boolean; title: string; files: CatalogFile[]; needs_review?: boolean
+  cover?: string | null
 }
 export type Catalog = { version: number; generated: string; entries: Entry[] }
 export type LessonStep =
@@ -47,5 +48,7 @@ export function readerUrl(f: CatalogFile): string | null {
 export function viewUrl(f: CatalogFile) {
   return f.drive_id ? `https://drive.google.com/file/d/${f.drive_id}/view` : f.url
 }
+export const REPO_URL = (import.meta.env.VITE_REPO_URL as string | undefined) || 'https://github.com/'
+export const coverSrc = (e: { cover?: string | null }) => (!e.cover ? null : e.cover.startsWith('http') ? e.cover : `${base}/${e.cover}`)
 export const mb = (b: number | null | undefined) => (b ? `${(b / 1e6).toFixed(b > 1e8 ? 0 : 1)} MB` : '')
 export const kindOrder = ['textbook', 'teacher_guide', 'workbook', 'answer_guide', 'exam_guide', 'interactive', 'learning_guide', 'syllabus']

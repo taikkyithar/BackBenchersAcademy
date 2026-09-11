@@ -60,3 +60,9 @@ flowchart LR
 
 Teachers, translators, 3D artists, video makers and developers are all needed — most tasks need no coding.
 Read [CONTRIBUTING.md](CONTRIBUTING.md) (Burmese + English) and the [roadmap](docs/ROADMAP.md).
+
+## Deploy (public)
+
+* Push to `main` → [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds `web/` and publishes it to **GitHub Pages** (repo Settings → Pages → Source: *GitHub Actions*). The site is static, has no accounts, no analytics, no server.
+* **In-app page rendering** needs a tiny CORS proxy because the textbook hosts send no CORS headers: deploy [`scripts/pdf-proxy-worker.js`](scripts/pdf-proxy-worker.js) to Cloudflare Workers (free tier) and set the repo variable `PDF_PROXY_URL`. Without it the reader falls back to "open original" links, which always work.
+* Any static host works (Cloudflare Pages, Netlify, a school server): `cd web && npm ci --legacy-peer-deps && npm run build` → `web/dist/`.

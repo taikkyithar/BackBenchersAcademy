@@ -1,13 +1,15 @@
 import { Link, useParams } from 'react-router-dom'
 import { KINDS, subjectInfo } from '../data/curriculum'
-import { kindOrder, mb, useCatalog, useLessons, viewUrl, type Entry } from '../data/catalog'
+import { REPO_URL, coverSrc, kindOrder, mb, useCatalog, useLessons, viewUrl, type Entry } from '../data/catalog'
 import { useT, num } from '../i18n'
 
 function BookRow({ e }: { e: Entry }) {
   const { t, lang, bi } = useT()
   const f = e.files[0]
+  const cover = coverSrc(e)
   return (
     <div className="item">
+      {cover ? <img className="cover" src={cover} alt="" loading="lazy" /> : <div className="cover placeholder" />}
       <div className="t">
         <div>{bi(KINDS[e.kind] ?? { my: e.kind, en: e.kind })}{e.part ? ` · ${t('part')} ${num(e.part, lang)}` : ''} {e.curriculum === 'old' && <span className="badge">{t('curriculumOld')}</span>} {e.language !== 'my' && <span className="badge">{e.language}</span>} {e.publisher.includes('NUG') && <span className="badge">NUG</span>}</div>
         <div className="m">{f.title || f.filename} · {mb(f.bytes)} · {t('source')}: {e.files.map((x) => x.source).join(', ')}</div>
@@ -34,7 +36,7 @@ export default function SubjectPage() {
       <h1 style={{ margin: '.2rem 0', color: info.color }}>{info.icon} {bi(info)} <span className="muted" style={{ fontSize: '1rem' }}>· {gLabel}</span></h1>
       <h2>{t('lessons')}</h2>
       {mine.length === 0 ? (
-        <div className="notice">{t('noLessonsYet')} <a href="https://github.com/" target="_blank" rel="noreferrer">{t('contribute')} →</a></div>
+        <div className="notice">{t('noLessonsYet')} <a href={REPO_URL} target="_blank" rel="noreferrer">{t('contribute')} →</a></div>
       ) : (
         <div className="list">
           {mine.map((l) => (

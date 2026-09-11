@@ -22,16 +22,17 @@ def index(include_extra: bool = False, probe_sizes: bool = False) -> list[dict]:
             log(f"[bookhub] skip {p}: {e}")
             continue
         seen = set()
-        for m in re.finditer(r'alt="([^"]+?)"[\s\S]{0,4000}?drive\.google\.com/uc\?export=download&id=([A-Za-z0-9_-]{20,})', h):
-            fid = m.group(2)
+        for m in re.finditer(r'(?:<img src="([^"]+)" )?alt="([^"]+?)"[\s\S]{0,4000}?drive\.google\.com/uc\?export=download&id=([A-Za-z0-9_-]{20,})', h):
+            fid = m.group(3)
             if fid in seen:
                 continue
             seen.add(fid)
-            title = re.sub(r"\s+", " ", m.group(1)).strip()
+            title = re.sub(r"\s+", " ", m.group(2)).strip()
+            cover = m.group(1) if m.group(1) and m.group(1).startswith("http") else None
             g = re.search(r"Grade_(\d+)", p)
             items.append({"source": NAME, "source_page": BASE + p, "url": f"https://drive.google.com/uc?export=download&id={fid}",
                           "drive_id": fid, "title": title, "filename": None, "bytes": None, "link_text": None,
-                          "section": None, "grade_hint": g.group(1) if g else p.rsplit("/", 1)[-1]})
+                          "section": None, "cover_url": cover, "grade_hint": g.group(1) if g else p.rsplit("/", 1)[-1]})
         log(f"[bookhub] {p}: {len(seen)} files")
     if probe_sizes:
         def _probe(it):

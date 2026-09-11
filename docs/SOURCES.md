@@ -22,3 +22,10 @@ Sources that duplicate each other are merged in `catalog/catalog.json`; every al
 * KG–Grade 12 "new curriculum" (သင်ရိုးသစ်) was rolled out one grade per year from 2016-17 (KG) to 2022-23 (Grade 12). Primary grades were developed with JICA (CREATE), middle school with ADB, and high school with the MoE curriculum committees.
 * Since 2021 two ministries publish: the MoE in Naypyidaw and the NUG MoE. Grade 10–12 textbook editions differ slightly between them; the catalog tags `publisher` so lessons can reference either.
 * Subject list per level: KG (Myanmar, English, Maths, Science, Social, Arts, PE), Grade 1–5 (Myanmar, English, Maths, Science, Social Studies, Morality & Civics, Life Skills, PE, Visual Arts, Performing Arts), Grade 6–9 (+ Geography, History, ICT), Grade 10–12 (Myanmar, English, Maths + electives: Physics, Chemistry, Biology, Economics, Geography, History, Optional Myanmar).
+
+## File format note
+
+Every textbook PDF checked so far is a **scan**: each page is one CMYK JPX/JPEG image at 150 dpi and the PDF has no fonts,
+so there is no selectable/searchable text. Any text-based feature (search, chapter detection, read-aloud, translation)
+needs OCR first — see the roadmap. Burmese OCR quality with Tesseract's `mya` model is usable for headings and chapter
+titles; body text needs cleanup by volunteers.

@@ -5,7 +5,7 @@ import type { Group } from 'three'
 import { useSettings, useT, num } from '../i18n'
 
 /** Shared canvas wrapper: stars, lights, orbit controls, adaptive resolution. */
-export function Scene({ children, camera = [0, 4, 12], small, hint, controls = true }: { children: ReactNode; camera?: [number, number, number]; small?: boolean; hint?: string; controls?: boolean }) {
+export function Scene({ children, camera = [0, 4, 12], target = [0, 0, 0], small, hint, controls = true }: { children: ReactNode; camera?: [number, number, number]; target?: [number, number, number]; small?: boolean; hint?: string; controls?: boolean }) {
   return (
     <div className={`scene ${small ? 'small' : ''}`}>
       <Canvas dpr={[1, 1.5]} camera={{ position: camera, fov: 45 }} gl={{ antialias: true, powerPreference: 'low-power' }}>
@@ -15,7 +15,7 @@ export function Scene({ children, camera = [0, 4, 12], small, hint, controls = t
         <pointLight position={[-6, 4, -4]} intensity={0.6} color="#3a86ff" />
         <Stars radius={60} depth={30} count={1200} factor={3} fade speed={0.4} />
         <Suspense fallback={null}>{children}</Suspense>
-        {controls && <OrbitControls enablePan={false} minDistance={4} maxDistance={40} maxPolarAngle={Math.PI * 0.55} />}
+        {controls && <OrbitControls target={target} enablePan={false} minDistance={4} maxDistance={40} maxPolarAngle={Math.PI * 0.55} />}
         <AdaptiveDpr pixelated />
       </Canvas>
       {hint && <div className="hint">{hint}</div>}

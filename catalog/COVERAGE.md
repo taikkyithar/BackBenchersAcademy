@@ -2,50 +2,61 @@
 
 Cell legend: **T** textbook · **G** teacher guide · **A** answer guide · **W** workbook · **E** exam guide · **I** interactive · **S** syllabus · **L** learning guide. Number = how many files (parts/sources).
 
-| Grade | Myanmar | English | Mathematics | Science | Social Studies | Geography | History | Geography & History | Economics | Biology | Chemistry | Physics | Morality & Civics | Life Skills | Physical Education | Visual Arts | Performing Arts | Optional Myanmar | Arts | General (cross-subject guides) |
-|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
-| KG | T |  | G T2 |  |  |  |  |  |  |  |  |  |  |  |  | G T |  |  |  | G L |
-| 1 | T3 | T2 | T | I T2 | T2 |  |  |  |  |  |  |  | T | T | T | T | T |  |  |  |
-| 2 | A T3 | A T | A T3 | A T2 | A T |  |  |  |  |  |  |  | T3 | T | T | T | T |  |  |  |
-| 3 | A T3 | A T | A T4 | A T3 | A T2 |  |  |  |  |  |  |  | G T2 | T2 | T4 | T2 | T2 |  |  |  |
-| 4 | A T4 | A T | A T | A I T4 | A T | T |  | T |  |  |  |  | T3 | T | T3 | T | T |  |  |  |
-| 5 | A T | A T | A T | A T | A T | T |  | T |  |  |  |  | T |  |  |  |  |  |  |  |
-| 6 | A T3 | A T | A2 T3 | A T |  | A T | A T |  |  |  |  |  | T | T | T | T | T |  |  |  |
-| 7 | A T3 | A T | A2 T3 | A T |  | A T3 | A T |  |  |  |  |  | T | T3 | T2 | T | T |  | T |  |
-| 8 | A T | A T | A2 T3 | A T |  | A T | A T |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| 9 | A T | A T | A2 T2 | A T |  | A T | A T |  |  |  |  |  |  |  |  |  |  |  |  |  |
-| 10 | A T4 | A T3 | A T3 | T2 | T3 | T14 | T2 |  | A T2 | A T2 W2 | A T3 W2 | A T2 W2 | T | T3 | T3 | T | T | T |  |  |
-| 11 | A G S T | A S T | A T2 |  |  |  |  |  | T | A T W | A T2 W | A T2 W |  |  |  |  |  | T |  |  |
-| 12 | A G T | A G T | A E T2 |  |  | T | T |  | A T | A T | A T2 | A T3 |  |  |  |  |  | S |  |  |
+| Grade | Myanmar | English | Mathematics | Science | Social Studies | Geography | History | Geography & History | Economics | Biology | Chemistry | Physics | Morality & Civics | Life Skills | Physical Education | Visual Arts | Performing Arts | Optional Myanmar | Arts | General (cross-subject guides) | unknown |
+|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|---|
+| KG | T |  | G T2 |  |  |  |  |  |  |  |  |  |  |  |  | G T |  |  |  | G L |  |
+| 1 | T3 | T | T | I T2 | T2 |  |  |  |  |  |  |  | T | T | T | T | T |  |  |  |  |
+| 2 | A T3 | A T | A T3 | A T | A T |  |  |  |  |  |  |  | T3 | T | T | T | T |  |  |  |  |
+| 3 | A T3 | A T | A T4 | A T2 | A T2 |  |  |  |  |  |  |  | G T2 | T2 | T4 | T2 | T2 |  |  |  |  |
+| 4 | A T4 | A T | A T | A T4 | A T | T |  | T |  |  |  |  | T3 | T | T3 | T | T |  | T |  |  |
+| 5 | A T | A T | A T | A T | A T | T |  | T |  |  |  |  | T |  |  |  |  |  |  |  |  |
+| 6 | A T3 | A T | A T3 | A T |  | A T | A T |  |  |  |  |  | T | T | T | T | T |  |  |  |  |
+| 7 | A T3 | A T | A T3 | A T |  | A T3 | A T |  |  |  |  |  | T | T3 | T2 | T | T |  | T |  |  |
+| 8 | A T | A T | A T3 | A T |  | A T | A T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| 9 | A T | A T | A T2 | A T |  | A T | A T |  |  |  |  |  |  |  |  |  |  |  |  |  |  |
+| 10 | A T4 | A T3 | A T3 | T2 | T3 | T14 | T2 |  | A T2 | A T2 W2 | A T4 W2 | A T3 W2 | T | T3 | T3 | T | T | T |  |  |  |
+| 11 | G T | A T | A T |  |  |  |  |  | T | A T W | A T W | A T W |  |  |  |  |  | T |  |  | A |
+| 12 | G T | A G T | A E T |  |  | T | T |  | A T | A T | A T2 | A T3 |  |  |  |  |  | S |  |  | A |
 
-**307** curriculum entries (+8 off-curriculum), preferred copies total ≈ **8.08 GB**.
+**296** curriculum entries (+8 off-curriculum), preferred copies total ≈ **5.09 GB**.
 
+## Unclassified (help wanted: extend `crawler/normalize.py`)
+
+- `g11-unknown-answer-guide` — Myanmar Grade 11 Myanmasar Answers Complete Answers (အဖြေစုံများ) PDF — bookhub https://drive.google.com/uc?export=download&id=154tom9h7OTcplPW2U8QPg-gkBYm-PkjA
+- `g12-unknown-answer-guide` — Myanmar Grade 12 Myanmasar Answers Complete Answers (အဖြေစုံများ) PDF — bookhub https://drive.google.com/uc?export=download&id=14Ys4yC-sqbQuetsvDxXehhXoN3K9E5-f
 
 ## Needs a human look (one source hosts several files that classify as the same book — editions? volumes?)
 
 - `gkg-general-learning-guide` — kg2-learning-guide.pdf, kg1-language-guide.pdf
-- `g1-english-textbook-en` — G1_English-TB-10-01-2017-outline.pdf, Myanmar-Grade-1-English-Textbook.pdf, grade1_English.pdf
-- `g1-mathematics-textbook` — G1_Math-text-book-final.pdf, Myanmar-Grade-1-Mathematics-Textbook.pdf, grade1_Math.pdf, G-1-Mathematic-TB.pdf
+- `g1-english-textbook-en` — G1_English-TB-10-01-2017-outline.pdf, Myanmar-Grade-1-English-Textbook.pdf, grade1_English.pdf, Myanmar Grade 1 English Textbook Textbook PDF
+- `g1-mathematics-textbook` — G1_Math-text-book-final.pdf, Myanmar-Grade-1-Mathematics-Textbook.pdf, grade1_Math.pdf, Myanmar Grade 1 Mathematics Textbook Textbook PDF
 - `g1-morality-civics-textbook` — G1_M_C-TBFO.pdf, G1-Morality-Civic-TB.pdf, 6.MC_.pdf
-- `g1-myanmar-textbook` — Myanmar-Grade-1-Myanmar-Textbook.pdf, grade1_Myanmar.pdf, G1-Myanmarsa-TB.pdf
-- `g1-science-textbook` — G1-Science-TB.pdf, grade1_Science.pdf, G1-Science-TB.pdf
-- `g2-english-textbook-en` — G2_Textbook_English_15_Nov_Outline.pdf, Myanmar-Grade-2-English-Textbook.pdf, grade2_English.pdf, G2-English-TB.pdf
-- `g2-mathematics-textbook` — Myanmar-Grade-2-Mathematics-Textbook.pdf, grade2_Math.pdf, G2-Mathematics-TB.pdf
-- `g2-myanmar-textbook` — G2-Myanmarsa-TB.pdf, Myanmar-Grade-2-Myanmar-Textbook.pdf, G2-áá¼ááºáá¬áá¬.pdf
-- `g2-science-textbook` — G2_Textbook_Science_24_Nov_2017_Outline.pdf, G2-Science-TB.pdf, grade2_Science.pdf, Let's Learn Science..pdf, G2-Science-TB.pdf
-- `g3-english-textbook-en` — G3_TB_20181004_English_Outline.pdf, Myanmar-TB-G-3-Eng.pdf, Myanmar-Grade-3-English-Textbook.pdf, grade3_Eng.pdf, Grade3(á¡ááºá¹ááá­ááº).pdf
-- `g3-mathematics-textbook` — Myanmar-Grade-3-Mathematics-Textbook.pdf, grade3_Math.pdf, Grade3(áááºá¹áá»á¬).pdf
-- `g3-myanmar-textbook` — Myanmar-Language-Subject-Grade-3-Textbook.pdf, Myanmar-Grade-3-Myanmar-Textbook-2015-16.pdf, Grade3(áá¼ááºáá¬).pdf
-- `g3-science-textbook` — G3_TB_Science_20180926_Outline.pdf, Grade3Science.pdf, grade3_Science.pdf
-- `g4-english-textbook-en` — Grade4-Eng-Text.pdf, Myanmar-Grade-4-English-Textbook.pdf, grade4_English.pdf, Grade-4-English-TB-Eng.pdf
-- `g4-mathematics-textbook` — Grade4-Math-Text.pdf, Myanmar-Grade-4-Mathematics-Textbook.pdf, grade4_Math.pdf, Grade-4Maths-TB-MM.pdf
-- `g4-myanmar-textbook` — Myanmar-Grade-4-Myanmar-Textbook.pdf, grade4_Myanmar.pdf, Grade-4-Myanmar-TB-MM.pdf
+- `g1-myanmar-textbook` — Myanmar-Grade-1-Myanmar-Textbook.pdf, grade1_Myanmar.pdf, Myanmar Grade 1 Burmese Textbook Textbook PDF
+- `g1-science-textbook` — G1-Science-TB.pdf, grade1_Science.pdf, Myanmar Grade 1 Science Textbook Textbook PDF
+- `g2-english-textbook-en` — G2_Textbook_English_15_Nov_Outline.pdf, Myanmar-Grade-2-English-Textbook.pdf, grade2_English.pdf, Myanmar Grade 2 English Textbook Textbook PDF
+- `g2-mathematics-textbook` — Myanmar-Grade-2-Mathematics-Textbook.pdf, grade2_Math.pdf, Myanmar Grade 2 Mathematics Textbook Textbook PDF
+- `g2-myanmar-textbook` — G2-Myanmarsa-TB.pdf, Myanmar-Grade-2-Myanmar-Textbook.pdf, Myanmar Grade 2 Burmese Textbook Textbook PDF
+- `g2-science-textbook` — G2_Textbook_Science_24_Nov_2017_Outline.pdf, G2-Science-TB.pdf, grade2_Science.pdf, Myanmar Grade 2 Science Textbook Textbook PDF, Myanmar Grade 2 Science Textbook Inerictive science Textbook, Myanmar Grade 2 Let's Learn Science Textbook Textbook PDF
+- `g3-english-textbook-en` — G3_TB_20181004_English_Outline.pdf, Myanmar-TB-G-3-Eng.pdf, Myanmar-Grade-3-English-Textbook.pdf, grade3_Eng.pdf, Myanmar Grade 3 English Textbook Textbook PDF
+- `g3-mathematics-textbook` — Myanmar-Grade-3-Mathematics-Textbook.pdf, grade3_Math.pdf, Myanmar Grade 3 Mathematics Textbook Textbook PDF
+- `g3-myanmar-textbook` — Myanmar-Language-Subject-Grade-3-Textbook.pdf, Myanmar-Grade-3-Myanmar-Textbook-2015-16.pdf, Myanmar Grade 3 Burmese Textbook Textbook PDF
+- `g3-science-textbook` — G3_TB_Science_20180926_Outline.pdf, Grade3Science.pdf, grade3_Science.pdf, Myanmar Grade 3 Science Textbook Textbook PDF, Myanmar Grade 3 Science Textbook Inerictive science Textbook
+- `g4-english-textbook-en` — Grade4-Eng-Text.pdf, Myanmar-Grade-4-English-Textbook.pdf, grade4_English.pdf, Myanmar Grade 4 English Textbook Textbook PDF
+- `g4-mathematics-textbook` — Grade4-Math-Text.pdf, Myanmar-Grade-4-Mathematics-Textbook.pdf, grade4_Math.pdf, Myanmar Grade 4 Mathematics Textbook Textbook PDF
+- `g4-myanmar-textbook` — Myanmar-Grade-4-Myanmar-Textbook.pdf, grade4_Myanmar.pdf, Myanmar Grade 4 Burmese Textbook Textbook PDF
 - `g4-performing-arts-textbook` — Grade4-Artmusic-Text.pdf, Grade4-Artmusic.pdf, Grade-4-Performing-Arts-TB-MM.pdf
-- `g4-science-textbook` — Grade-4Science-TB-MM.pdf, grade4_Science.pdf, Grade-4Science-TB-MM.pdf
+- `g4-science-textbook` — Grade-4Science-TB-MM.pdf, grade4_Science.pdf, Myanmar Grade 4 Science Textbook Textbook PDF, Myanmar Grade 4 Science Textbook Inerictive science Textbook
+- `g6-mathematics-answer-guide` — Myanmar Grade 6 Mathematics Answers Complete Answers (အဖြေစု, Myanmar Grade 6 Geometry Answers Complete Answers (အဖြေစုံမျ
+- `g6-mathematics-textbook` — Myanmar-Grade-6-Mathematics-Textbook.pdf, Myanmar Grade 6 Geometry Textbook Textbook PDF, Myanmar Grade 6 Mathematics Textbook Textbook PDF
+- `g7-mathematics-answer-guide` — Myanmar Grade 7 Mathematics Answers Complete Answers (အဖြေစု, Myanmar Grade 7 Geometry Answers Complete Answers (အဖြေစုံမျ
+- `g7-mathematics-textbook` — Myanmar Grade 7 Mathematics Textbook Textbook PDF, Myanmar Grade 7 Geometry Textbook Textbook PDF
 - `g7-mathematics-textbook-p2` — G7-Math2-Text.pdf, G7-Math1-Text_p2.pdf, Myanmar-Grade-7-Mathematics-2-Textbook.pdf
-- `g8-mathematics-textbook` — Grade (8) Mathematics Textbook.pdf,  G8 áááºá¹áá»á¬ á Text.pdf.pdf
+- `g8-mathematics-answer-guide` — Myanmar Grade 8 Mathematics Answers Complete Answers (အဖြေစု, Myanmar Grade 8 Geometry Answers Complete Answers (အဖြေစုံမျ
+- `g8-mathematics-textbook` — Myanmar Grade 8 Mathematics Textbook Textbook PDF, Myanmar Grade 8 Geometry Textbook Textbook PDF
+- `g9-mathematics-answer-guide` — Myanmar Grade 9 Mathematics Answers Complete Answers (အဖြေစု, Myanmar Grade 9 Geometry Answers Complete Answers (အဖြေစုံမျ
+- `g9-mathematics-textbook` — Myanmar Grade 9 Mathematics Textbook Textbook PDF, Myanmar Grade 9 Geometry Textbook Textbook PDF
 - `g10-optional-myanmar-textbook` — g10text_mm_plays.pdf, g10text_mm_prose.pdf, g10text_mm_language_history.pdf, g10text_mm_poem.pdf
 - `g10-social-studies-textbook-p1` — g10text_socialscience3_p1.pdf, g10text_socialscience1.pdf
 - `g10-social-studies-textbook-p2` — g10text_socialscience2.pdf, g10text_socialscience3_p2.pdf, Grade-10-Social-Studies-STEAMS-2.pdf
 - `g11-optional-myanmar-textbook` — G11_Myanmarsar_စိတ်ကြိုက်မြန်မာစာ_OB_Poem_new_course.pdf, G11_Myanmarsar_စိတ်ကြိုက်မြန်မာစာ_စကားပြေ_OB_Prose_new_cours
-- `g12-chemistry-answer-guide` — G12_chemistry(á¡áááºá¸áá¯á¶_á¡áá¼á±).pdf, New_Grade_12_chemistry.pdf
+- `g12-chemistry-answer-guide` — Myanmar Grade 12 Chemistry Answers Complete Answers (အဖြေစုံ, Myanmar Grade 12 Chemistry Answer Key Textbook PDF

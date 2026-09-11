@@ -55,7 +55,8 @@ def build() -> dict:
             "id": eid, "needs_review": needs_review, "grade": best["grade"], "subject": best["subject"], "subject_label": SUBJECT_LABEL.get(best["subject"], best["subject"]),
             "kind": best["kind"], "part": best["part"], "curriculum": best["curriculum"], "language": best["language"],
             "publisher": best["publisher"], "off_curriculum": best["off_curriculum"], "title": best["title"],
-            "files": [{k: a.get(k) for k in ("source", "source_page", "url", "drive_id", "filename", "bytes", "title")} for a in alts],
+            "cover_url": next((a.get("cover_url") for a in alts if a.get("cover_url")), None),
+            "files": [{k: a.get(k) for k in ("source", "source_page", "url", "drive_id", "filename", "bytes", "title", "cover_url")} for a in alts],
         })
     order = {g: i for i, g in enumerate(GRADES)}
     entries.sort(key=lambda e: (order.get(e["grade"], 99), e["subject"], e["kind"], e["part"] or 0, e["curriculum"], e["language"]))

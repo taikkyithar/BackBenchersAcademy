@@ -1,7 +1,7 @@
 import { Suspense, lazy, useEffect } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import { subjectInfo } from '../data/curriculum'
-import { useCatalog, useLessons } from '../data/catalog'
+import { coverSrc, useCatalog, useLessons } from '../data/catalog'
 import { useSettings, useT, num } from '../i18n'
 
 const Bookshelf = lazy(() => import('../scenes/Bookshelf'))
@@ -36,11 +36,12 @@ export default function GradePage() {
         {subjects.map((s) => {
           const info = subjectInfo(s)
           const n = entries.filter((e) => e.subject === s).length
+          const cover = coverSrc(entries.filter((e) => e.subject === s && e.kind === 'textbook').find((e) => e.cover) ?? entries.find((e) => e.subject === s && e.cover) ?? {})
           const nl = lessons.data?.filter((l) => l.grade === grade && l.subject === s).length ?? 0
           return (
             <Link key={s} to={`/grade/${grade}/${s}`} className="card" style={{ ['--c' as string]: info.color }}>
-              <div className="big">{info.icon}</div>
-              <div>{bi(info)}</div>
+              {cover ? <img className="cover wide" src={cover} alt="" loading="lazy" /> : <div className="big">{info.icon}</div>}
+              <div>{cover ? `${info.icon} ` : ''}{bi(info)}</div>
               <div className="sub">{num(n, lang)} {t('books')}{nl ? ` · ${num(nl, lang)} ${t('lessons')}` : ''}</div>
             </Link>
           )

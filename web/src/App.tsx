@@ -1,5 +1,6 @@
 import { Link, Outlet } from 'react-router-dom'
 import { useSettings, useT } from './i18n'
+import { REPO_URL } from './data/catalog'
 
 export default function App() {
   const { t } = useT()
@@ -14,7 +15,7 @@ export default function App() {
         <button className={`chip ${lang === 'en' ? 'active' : ''}`} onClick={() => setLang('en')}>EN</button>
       </header>
       <main><Outlet /></main>
-      <footer>{t('license')} · <a href="https://github.com/" target="_blank" rel="noreferrer">GitHub</a></footer>
+      <footer>{t('license')} · <a href={REPO_URL} target="_blank" rel="noreferrer">GitHub</a></footer>
     </div>
   )
 }
