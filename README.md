@@ -66,5 +66,5 @@ Read [CONTRIBUTING.md](CONTRIBUTING.md) (Burmese + English) and the [roadmap](do
 ## Deploy (public)
 
 * Push to `main` → [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) builds `web/` and publishes it to **GitHub Pages** (repo Settings → Pages → Source: *GitHub Actions*). The site is static, has no accounts, no analytics, no server.
-* **In-app page rendering** needs a tiny CORS proxy because the textbook hosts send no CORS headers: deploy [`scripts/pdf-proxy-worker.js`](scripts/pdf-proxy-worker.js) to Cloudflare Workers (free tier) and set the repo variable `PDF_PROXY_URL`. Without it the reader falls back to "open original" links, which always work.
+* **In-app page rendering** goes through a tiny CORS proxy because the textbook hosts send no CORS headers: [`scripts/pdf-proxy-worker.js`](scripts/pdf-proxy-worker.js) on Cloudflare Workers (free tier), deployed at `https://bba-pdf-proxy.ack-enchers-cademy.workers.dev` and wired in via the repo variable `PDF_PROXY_URL`. Redeploy with `npx wrangler@4 deploy`. Without a proxy the reader falls back to "open original" links, which always work.
 * Any static host works (Cloudflare Pages, Netlify, a school server): `cd web && npm ci --legacy-peer-deps && npm run build` → `web/dist/`.
