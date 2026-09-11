@@ -3,13 +3,15 @@ Google Drive download links for each grade. Files live on Google Drive (public).
 
 Pages: https://mbsi.vercel.app/grades/Grade_1 … Grade_12  (also /grades/Islamic, /grades/General — off-curriculum, opt-in)
 """
-import html, re
+import html, os, re
 from concurrent.futures import ThreadPoolExecutor
-from ..common import fetch_text, gdrive_probe, log
+from ..common import fetch_text, gdrive_probe, log, read_json, write_json
 
 BASE = "https://mbsi.vercel.app"
 NAME = "bookhub"
 GRADE_PAGES = [f"/grades/Grade_{i}" for i in range(1, 13)]
+# Drive sizes/filenames are slow to probe (one request per file), so they are cached in the repo.
+SIZE_CACHE = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__)))), "catalog", "raw", "bookhub_sizes.json")
 EXTRA_PAGES = ["/grades/Islamic", "/grades/General"]
 
 
@@ -34,13 +36,23 @@ def index(include_extra: bool = False, probe_sizes: bool = False) -> list[dict]:
                           "drive_id": fid, "title": title, "filename": None, "bytes": None, "link_text": None,
                           "section": None, "cover_url": cover, "grade_hint": g.group(1) if g else p.rsplit("/", 1)[-1]})
         log(f"[bookhub] {p}: {len(seen)} files")
-    if probe_sizes:
+    cache = read_json(SIZE_CACHE, {})
+    for it in items:
+        c = cache.get(it["drive_id"])
+        if c:
+            it["bytes"], it["filename"] = c.get("bytes"), c.get("filename")
+    todo = [it for it in items if probe_sizes and not it.get("bytes")]
+    if todo:
         def _probe(it):
             r = gdrive_probe(it["drive_id"])
-            it.update({k: v for k, v in r.items() if k in ("bytes", "filename")})
-            if "error" in r:
-                it["probe_error"] = r["error"]
+            if r.get("bytes"):
+                it["bytes"], it["filename"] = r["bytes"], r.get("filename")
+                cache[it["drive_id"]] = {"bytes": r["bytes"], "filename": r.get("filename")}
+            else:
+                it["probe_error"] = r.get("error", "no-size")
             return it
         with ThreadPoolExecutor(4) as ex:
-            items = list(ex.map(_probe, items))
+            list(ex.map(_probe, todo))
+        write_json(SIZE_CACHE, cache)
+        log(f"[bookhub] probed {len(todo)} Drive files → {SIZE_CACHE}")
     return items

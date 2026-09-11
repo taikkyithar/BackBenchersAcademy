@@ -6,9 +6,11 @@ import { useSettings, useT, num } from '../i18n'
 
 /** Shared canvas wrapper: stars, lights, orbit controls, adaptive resolution. */
 export function Scene({ children, camera = [0, 4, 12], target = [0, 0, 0], small, hint, controls = true }: { children: ReactNode; camera?: [number, number, number]; target?: [number, number, number]; small?: boolean; hint?: string; controls?: boolean }) {
+  const [epoch, setEpoch] = useState(0)
   return (
     <div className={`scene ${small ? 'small' : ''}`}>
-      <Canvas dpr={[1, 1.5]} camera={{ position: camera, fov: 45 }} gl={{ antialias: true, powerPreference: 'low-power' }}>
+      <Canvas key={epoch} dpr={[1, 1.5]} camera={{ position: camera, fov: 45 }} gl={{ antialias: true, powerPreference: 'low-power' }}
+        onCreated={({ gl }) => gl.domElement.addEventListener('webglcontextlost', (e) => { e.preventDefault(); setTimeout(() => setEpoch((n) => n + 1), 800) }, { once: true })}>
         <color attach="background" args={['#0b1020']} />
         <ambientLight intensity={0.7} />
         <directionalLight position={[5, 8, 5]} intensity={1.2} />
@@ -117,20 +119,25 @@ export function SolarScene({ labels = true }: { labels?: boolean }) {
 }
 
 // ---------------------------------------------------------------- Simple pendulum (physics)
-export function PendulumScene({ length = 2, g = 9.8, theta0 = 0.5 }: { length?: number; g?: number; theta0?: number }) {
+function PendulumBob({ L, g, theta0 }: { L: number; g: number; theta0: number }) {
   const pivot = useRef<Group>(null)
+  useFrame(({ clock }) => { if (pivot.current) pivot.current.rotation.z = theta0 * Math.cos(Math.sqrt(g / L) * clock.elapsedTime) })
+  return (
+    <group ref={pivot} position={[0, 2.4, 0]}>
+      <mesh position={[0, -L / 2, 0]}><cylinderGeometry args={[0.02, 0.02, L, 8]} /><meshStandardMaterial color="#e8ecff" /></mesh>
+      <mesh position={[0, -L, 0]}><sphereGeometry args={[0.28, 24, 24]} /><meshStandardMaterial color="#ef476f" metalness={0.3} roughness={0.4} /></mesh>
+    </group>
+  )
+}
+export function PendulumScene({ length = 2, g = 9.8, theta0 = 0.5 }: { length?: number; g?: number; theta0?: number }) {
   const { lang } = useT()
   const [L, setL] = useState(length)
   const T = 2 * Math.PI * Math.sqrt(L / g)
-  useFrame(({ clock }) => { if (pivot.current) pivot.current.rotation.z = theta0 * Math.cos(Math.sqrt(g / L) * clock.elapsedTime) })
   return (
     <div>
       <Scene camera={[0, 0.5, 7]} small controls={false}>
         <mesh position={[0, 2.5, 0]}><boxGeometry args={[3, 0.15, 0.6]} /><meshStandardMaterial color="#8d6e63" /></mesh>
-        <group ref={pivot} position={[0, 2.4, 0]}>
-          <mesh position={[0, -L / 2, 0]}><cylinderGeometry args={[0.02, 0.02, L, 8]} /><meshStandardMaterial color="#e8ecff" /></mesh>
-          <mesh position={[0, -L, 0]}><sphereGeometry args={[0.28, 24, 24]} /><meshStandardMaterial color="#ef476f" metalness={0.3} roughness={0.4} /></mesh>
-        </group>
+        <PendulumBob L={L} g={g} theta0={theta0} />
         <Html position={[0, -2.2, 0]} center><div className="label3d">L = {num(L.toFixed(1), lang)} m · g = {num(g, lang)} m/s² · T = 2π√(L/g) = {num(T.toFixed(2), lang)} s</div></Html>
       </Scene>
       <div className="row" style={{ marginTop: '.5rem' }}>

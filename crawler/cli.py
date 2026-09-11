@@ -42,7 +42,7 @@ def cmd_catalog(a):
 def cmd_download(a):
     from .download import run
     run(budget_gb=a.budget_gb, grades=a.grades.split(",") if a.grades else None, kinds=a.kinds.split(",") if a.kinds else None,
-        include_off=a.include_off, sources=a.sources.split(",") if a.sources else None, dry_run=a.dry_run, limit=a.limit)
+        include_off=a.include_off, sources=a.sources.split(",") if a.sources else None, dry_run=a.dry_run, limit=a.limit, pause=a.pause)
 
 
 def cmd_verify(a):
@@ -64,7 +64,7 @@ def main(argv=None):
     s = sp.add_parser("index"); s.add_argument("--source"); s.add_argument("--sizes", action="store_true"); s.add_argument("--include-extra", action="store_true"); s.set_defaults(fn=cmd_index)
     s = sp.add_parser("catalog"); s.set_defaults(fn=cmd_catalog)
     s = sp.add_parser("download"); s.add_argument("--budget-gb", type=float); s.add_argument("--grades"); s.add_argument("--kinds"); s.add_argument("--sources")
-    s.add_argument("--include-off", action="store_true"); s.add_argument("--dry-run", action="store_true"); s.add_argument("--limit", type=int); s.set_defaults(fn=cmd_download)
+    s.add_argument("--include-off", action="store_true"); s.add_argument("--dry-run", action="store_true"); s.add_argument("--limit", type=int); s.add_argument("--pause", type=float, default=1.0); s.set_defaults(fn=cmd_download)
     s = sp.add_parser("verify"); s.set_defaults(fn=cmd_verify)
     a = p.parse_args(argv)
     a.fn(a)

@@ -75,7 +75,7 @@ def fetch_one(e: dict, files: list[dict]) -> dict:
     return {"id": e["id"], "error": last_err}
 
 
-def run(budget_gb: float | None = None, grades=None, kinds=None, include_off=False, sources=None, dry_run=False, limit=None):
+def run(budget_gb: float | None = None, grades=None, kinds=None, include_off=False, sources=None, dry_run=False, limit=None, pause: float = 1.0):
     cat = read_json(CATALOG)
     if not cat:
         raise SystemExit("catalog/catalog.json missing — run `python3 -m crawler catalog` first")
@@ -112,5 +112,6 @@ def run(budget_gb: float | None = None, grades=None, kinds=None, include_off=Fal
             spent += rec["bytes"]
             n_ok += 1
         write_json(MANIFEST, manifest)
+        time.sleep(pause)  # be polite to the volunteer-run mirrors
     log(f"[download] finished: +{n_ok} files ({spent/1e9:.2f} GB) · {n_skip} deferred for budget · {len(manifest['errors'])} errors")
     return manifest

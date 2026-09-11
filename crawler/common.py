@@ -116,18 +116,25 @@ def gdrive_probe(file_id: str) -> dict:
 
 # ---------------------------------------------------------------- files
 
-def stream_to_file(resp, dest: str, mode: str = "wb", progress_every: int = 20 << 20) -> int:
-    n = 0
+def stream_to_file(resp, dest: str, chunk: int = 256 << 10, stall_seconds: float = 15, min_rate: float = 20_000) -> int:
+    """Stream to dest (.part then rename). Raises RuntimeError('stalled …') when a chunk crawls in slower than
+    min_rate bytes/s for longer than stall_seconds — the caller then tries the next mirror."""
+    n, last_log = 0, 0
     tmp = dest + ".part"
-    with open(tmp, mode) as f:
+    with open(tmp, "wb") as f:
         while True:
-            b = resp.read(1 << 20)
+            t0 = time.time()
+            b = resp.read(chunk)
+            dt = time.time() - t0
             if not b:
                 break
             f.write(b)
             n += len(b)
-            if progress_every and n % progress_every < (1 << 20):
+            if dt > stall_seconds and len(b) / dt < min_rate:
+                raise RuntimeError(f"stalled ({len(b)} bytes in {dt:.0f}s)")
+            if n - last_log >= (20 << 20):
                 log(f"    … {n/1e6:.0f} MB")
+                last_log = n
     os.replace(tmp, dest)
     return n
 
