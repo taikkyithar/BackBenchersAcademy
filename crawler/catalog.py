@@ -36,6 +36,8 @@ def build() -> dict:
     raw = []
     for f in sorted(glob.glob(os.path.join(RAW_DIR, "*.json"))):
         items = read_json(f, [])
+        if not isinstance(items, list):  # e.g. bookhub_sizes.json cache
+            continue
         raw += items
         log(f"[catalog] {os.path.basename(f)}: {len(items)} items")
     groups: dict[str, list[dict]] = defaultdict(list)
