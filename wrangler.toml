@@ -1,0 +1,7 @@
+# Cloudflare Worker: CORS + Range proxy so the site can render textbook pages in-app.
+# Deploy:  npx wrangler@4 deploy      (after `npx wrangler@4 login`)
+# Then:    gh variable set PDF_PROXY_URL --body https://bba-pdf-proxy.<your-subdomain>.workers.dev
+name = "bba-pdf-proxy"
+main = "scripts/pdf-proxy-worker.js"
+compatibility_date = "2026-09-01"
+workers_dev = true
