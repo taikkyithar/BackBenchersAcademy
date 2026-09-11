@@ -1,0 +1,117 @@
+"""Merge raw source indexes into one deduplicated catalog with all alternates kept.
+
+Reads  catalog/raw/<source>.json  (written by `python3 -m crawler index`)
+Writes catalog/catalog.json, catalog/catalog.csv, catalog/COVERAGE.md
+"""
+from __future__ import annotations
+import csv, glob, os, re
+from collections import defaultdict
+from .common import read_json, write_json, log
+from .normalize import normalize, GRADES
+
+ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+RAW_DIR = os.path.join(ROOT, "catalog", "raw")
+OUT_JSON = os.path.join(ROOT, "catalog", "catalog.json")
+OUT_CSV = os.path.join(ROOT, "catalog", "catalog.csv")
+OUT_COV = os.path.join(ROOT, "catalog", "COVERAGE.md")
+
+# Preferred source order when several sources host the same book.
+SOURCE_RANK = {"myanmarexam": 0, "edu4mm": 1, "learnbig": 2, "bookhub": 3}
+SUBJECT_LABEL = {
+    "myanmar": "မြန်မာစာ / Myanmar", "english": "English", "mathematics": "သင်္ချာ / Mathematics", "science": "သိပ္ပံ / Science",
+    "social_studies": "လူမှုရေး / Social Studies", "geography": "ပထဝီဝင် / Geography", "history": "သမိုင်း / History",
+    "geography_history": "ပထဝီ+သမိုင်း / Geography & History", "economics": "ဘောဂဗေဒ / Economics", "biology": "ဇီဝဗေဒ / Biology",
+    "chemistry": "ဓာတုဗေဒ / Chemistry", "physics": "ရူပဗေဒ / Physics", "morality_civics": "ကိုယ်ကျင့်တရားနှင့်ပြည်သူ့နီတိ / Morality & Civics",
+    "life_skills": "ဘဝတွက်တာကျွမ်းကျင်စရာ / Life Skills", "physical_education": "ကာယပညာ / Physical Education",
+    "visual_arts": "ပန်းချီ / Visual Arts", "performing_arts": "ဂီတ / Performing Arts", "ict": "ICT", "optional_myanmar": "စိတ်ကြိုက်မြန်မာစာ / Optional Myanmar",
+    "arts": "အနုပညာ / Arts", "general": "General (cross-subject guides)", "islamic": "Islamic (off-curriculum)", "unknown": "unknown",
+}
+
+
+def slug(s: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", s.lower()).strip("-")
+
+
+def build() -> dict:
+    raw = []
+    for f in sorted(glob.glob(os.path.join(RAW_DIR, "*.json"))):
+        items = read_json(f, [])
+        raw += items
+        log(f"[catalog] {os.path.basename(f)}: {len(items)} items")
+    groups: dict[str, list[dict]] = defaultdict(list)
+    for it in raw:
+        n = normalize(it)
+        groups[n["key"]].append(n)
+    entries = []
+    for key, alts in groups.items():
+        alts.sort(key=lambda a: (SOURCE_RANK.get(a["source"], 9), -(a.get("bytes") or 0)))
+        best = alts[0]
+        eid = slug(f"g{best['grade']}-{best['subject']}-{best['kind']}" + (f"-p{best['part']}" if best["part"] else "")
+                   + ("-old" if best["curriculum"] == "old" else "") + (f"-{best['language']}" if best["language"] != "my" else "")
+                   + ("-nug" if "NUG" in best["publisher"] else ""))
+        srcs = [a["source"] for a in alts]
+        needs_review = any(srcs.count(x) > 1 for x in set(srcs))
+        entries.append({
+            "id": eid, "needs_review": needs_review, "grade": best["grade"], "subject": best["subject"], "subject_label": SUBJECT_LABEL.get(best["subject"], best["subject"]),
+            "kind": best["kind"], "part": best["part"], "curriculum": best["curriculum"], "language": best["language"],
+            "publisher": best["publisher"], "off_curriculum": best["off_curriculum"], "title": best["title"],
+            "files": [{k: a.get(k) for k in ("source", "source_page", "url", "drive_id", "filename", "bytes", "title")} for a in alts],
+        })
+    order = {g: i for i, g in enumerate(GRADES)}
+    entries.sort(key=lambda e: (order.get(e["grade"], 99), e["subject"], e["kind"], e["part"] or 0, e["curriculum"], e["language"]))
+    # de-duplicate ids
+    seen = defaultdict(int)
+    for e in entries:
+        seen[e["id"]] += 1
+        if seen[e["id"]] > 1:
+            e["id"] = f"{e['id']}-{seen[e['id']]}"
+    cat = {"version": 1, "generated_by": "python3 -m crawler catalog", "n_entries": len(entries), "n_raw": len(raw), "entries": entries}
+    write_json(OUT_JSON, cat)
+    with open(OUT_CSV, "w", newline="", encoding="utf-8") as f:
+        w = csv.writer(f)
+        w.writerow(["id", "grade", "subject", "kind", "part", "curriculum", "language", "publisher", "off_curriculum", "title", "n_sources", "preferred_source", "preferred_url", "bytes"])
+        for e in entries:
+            p = e["files"][0]
+            w.writerow([e["id"], e["grade"], e["subject"], e["kind"], e["part"] or "", e["curriculum"], e["language"], e["publisher"], e["off_curriculum"], e["title"], len(e["files"]), p["source"], p["url"], p.get("bytes") or ""])
+    write_coverage(entries)
+    log(f"[catalog] {len(raw)} raw → {len(entries)} unique entries → {OUT_JSON}")
+    return cat
+
+
+def write_coverage(entries: list[dict]) -> None:
+    core = [e for e in entries if not e["off_curriculum"]]
+    subjects = [s for s in SUBJECT_LABEL if s not in ("islamic",)]
+    subjects = [s for s in subjects if any(e["subject"] == s for e in core)]
+    lines = ["# Coverage matrix (auto-generated by `python3 -m crawler catalog`)", "",
+             "Cell legend: **T** textbook · **G** teacher guide · **A** answer guide · **W** workbook · **E** exam guide · **I** interactive · **S** syllabus · **L** learning guide. Number = how many files (parts/sources).", "",
+             "| Grade | " + " | ".join(SUBJECT_LABEL[s].split(" / ")[-1] for s in subjects) + " |",
+             "|---|" + "---|" * len(subjects)]
+    code = {"textbook": "T", "teacher_guide": "G", "answer_guide": "A", "workbook": "W", "exam_guide": "E", "interactive": "I", "syllabus": "S", "learning_guide": "L"}
+    for g in GRADES + ["unknown"]:
+        row = []
+        for s in subjects:
+            es = [e for e in core if e["grade"] == g and e["subject"] == s]
+            if not es:
+                row.append("")
+                continue
+            kinds = defaultdict(int)
+            for e in es:
+                kinds[code.get(e["kind"], "?")] += 1
+            row.append(" ".join(f"{k}{'' if v == 1 else v}" for k, v in sorted(kinds.items())))
+        if any(row):
+            lines.append(f"| {g} | " + " | ".join(row) + " |")
+    unknown = [e for e in core if e["subject"] == "unknown" or e["grade"] == "unknown"]
+    total_bytes = sum((e["files"][0].get("bytes") or 0) for e in core)
+    lines += ["", f"**{len(core)}** curriculum entries (+{len(entries)-len(core)} off-curriculum), preferred copies total ≈ **{total_bytes/1e9:.2f} GB**.", ""]
+    if unknown:
+        lines += ["## Unclassified (help wanted: extend `crawler/normalize.py`)", ""]
+        for e in unknown:
+            lines.append(f"- `{e['id']}` — {e['title']} — {e['files'][0]['source']} {e['files'][0]['url']}")
+    review = [e for e in core if e.get("needs_review")]
+    if review:
+        lines += ["", "## Needs a human look (one source hosts several files that classify as the same book — editions? volumes?)", ""]
+        for e in review:
+            names = ", ".join((f.get("filename") or f.get("title") or "?")[:60] for f in e["files"])
+            lines.append(f"- `{e['id']}` — {names}")
+    with open(OUT_COV, "w", encoding="utf-8") as f:
+        f.write("\n".join(lines) + "\n")

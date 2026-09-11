@@ -1,0 +1,21 @@
+name: ci
+on: [push, pull_request]
+jobs:
+  catalog:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: python3 -m crawler catalog
+      - run: git diff --stat --exit-code catalog/ || (echo "catalog/ is stale: run 'python3 -m crawler catalog' and commit" && exit 1)
+  web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 22, cache: npm, cache-dependency-path: web/package-lock.json }
+      - run: cd web && npm ci --legacy-peer-deps
+      - run: cd web && npm run build
+      - uses: actions/upload-artifact@v4
+        with: { name: web-dist, path: web/dist }

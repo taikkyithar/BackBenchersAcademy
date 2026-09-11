@@ -1,0 +1,26 @@
+{
+  "id": "g6-science-solar-system",
+  "grade": "6",
+  "subject": "science",
+  "title": { "my": "နေအဖွဲ့အစည်း", "en": "The Solar System" },
+  "summary": { "my": "နေနှင့် ဂြိုဟ်ကြီး ၈ လုံးကို 3D ဖြင့် လှည့်ပတ်ကြည့်မည်။", "en": "Fly around the Sun and the eight planets in 3D." },
+  "duration_min": 10,
+  "textbook_ref": { "catalog_id": "g6-science-textbook", "chapter": null, "pages": null },
+  "steps": [
+    { "type": "text", "title": { "my": "နေအဖွဲ့အစည်းဆိုသည်မှာ", "en": "What is the Solar System?" },
+      "body": { "my": "နေအဖွဲ့အစည်းတွင် အလယ်ဗဟို၌ ကြယ်တစ်လုံးဖြစ်သော နေ ရှိပြီး ၎င်း၏ ဆွဲငင်အားကြောင့် ဂြိုဟ်ကြီး ၈ လုံး၊ ဂြိုဟ်ငယ်များ၊ ဥက္ကာပျံများနှင့် ကြယ်တံခွန်များ လှည့်ပတ်နေကြသည်။ နေနှင့် နီးသည့် အစီအစဉ်အတိုင်း — ဗုဒ္ဓဟူးဂြိုဟ်၊ သောကြာဂြိုဟ်၊ ကမ္ဘာ၊ အင်္ဂါဂြိုဟ်၊ ကြာသပတေးဂြိုဟ်၊ စနေဂြိုဟ်၊ ယူရေးနပ်စ်ဂြိုဟ်၊ နက်ပကျွန်းဂြိုဟ်။", "en": "The Solar System has the Sun, a star, at its centre. Its gravity keeps eight planets, dwarf planets, asteroids and comets in orbit. From the Sun outward: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune." } },
+    { "type": "video", "title": { "my": "ဗီဒီယို ရှင်းလင်းချက်", "en": "Video explainer" }, "url": null, "provider": "youtube" },
+    { "type": "scene", "title": { "my": "3D နေအဖွဲ့အစည်း", "en": "3D Solar System" }, "scene": "solar", "params": { "labels": true },
+      "narration": { "my": "ဂြိုဟ်တစ်လုံးချင်းစီသည် နေကို သူ့လမ်းကြောင်းအတိုင်း လှည့်ပတ်သည်။ နေနှင့် နီးလေ၊ လှည့်ပတ်ချိန် တိုလေ ဖြစ်သည် — ဗုဒ္ဓဟူးဂြိုဟ်သည် ရက် ၈၈ ရက်၊ ကမ္ဘာသည် ၃၆၅ ရက်၊ နက်ပကျွန်းဂြိုဟ်သည် နှစ်ပေါင်း ၁၆၅ နှစ် ကြာသည်။ (အရွယ်အစားနှင့် အကွာအဝေးများကို မြင်သာအောင် ချဲ့ထားသည်။)", "en": "Each planet orbits the Sun on its own path. The closer to the Sun, the shorter the year: Mercury takes 88 days, Earth 365 days, Neptune 165 years. (Sizes and distances are not to scale.)" } },
+    { "type": "quiz", "question": { "my": "နေနှင့် အနီးဆုံး ဂြိုဟ်မှာ မည်သည်နည်း။", "en": "Which planet is closest to the Sun?" },
+      "choices": [ { "my": "ကမ္ဘာ", "en": "Earth" }, { "my": "သောကြာဂြိုဟ်", "en": "Venus" }, { "my": "ဗုဒ္ဓဟူးဂြိုဟ်", "en": "Mercury" }, { "my": "အင်္ဂါဂြိုဟ်", "en": "Mars" } ], "answer": 2,
+      "explain": { "my": "ဗုဒ္ဓဟူးဂြိုဟ်သည် နေနှင့် အနီးဆုံးဖြစ်ပြီး အသေးဆုံး ဂြိုဟ်လည်း ဖြစ်သည်။", "en": "Mercury is the closest and also the smallest planet." } },
+    { "type": "quiz", "question": { "my": "အကြီးဆုံး ဂြိုဟ်မှာ မည်သည်နည်း။", "en": "Which is the largest planet?" },
+      "choices": [ { "my": "စနေဂြိုဟ်", "en": "Saturn" }, { "my": "ကြာသပတေးဂြိုဟ်", "en": "Jupiter" }, { "my": "ကမ္ဘာ", "en": "Earth" } ], "answer": 1,
+      "explain": { "my": "ကြာသပတေးဂြိုဟ်သည် ကမ္ဘာထက် ၁၁ ဆခန့် ကြီးသည်။", "en": "Jupiter is about 11 times wider than Earth." } },
+    { "type": "text", "title": { "my": "အနှစ်ချုပ်", "en": "Summary" },
+      "body": { "my": "• နေသည် ကြယ်တစ်လုံးဖြစ်ပြီး နေအဖွဲ့အစည်း၏ ဗဟိုဖြစ်သည်\n• ဂြိုဟ်ကြီး ၈ လုံး — အတွင်းဂြိုဟ် ၄ လုံး (ကျောက်ဂြိုဟ်) နှင့် အပြင်ဂြိုဟ် ၄ လုံး (ဓာတ်ငွေ့ဂြိုဟ်)\n• နေနှင့် ဝေးလေ လှည့်ပတ်ချိန် ကြာလေ", "en": "• The Sun is a star at the centre of the Solar System\n• 8 planets: 4 inner rocky planets and 4 outer gas giants\n• The farther from the Sun, the longer the orbit" } }
+  ],
+  "contributors": ["BackBenchers Academy"],
+  "license": "CC-BY-4.0"
+}

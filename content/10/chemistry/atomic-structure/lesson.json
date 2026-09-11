@@ -1,0 +1,28 @@
+{
+  "id": "g10-chemistry-atomic-structure",
+  "grade": "10",
+  "subject": "chemistry",
+  "title": { "my": "အက်တမ်၏ ဖွဲ့စည်းပုံ", "en": "Structure of the atom" },
+  "summary": { "my": "ပရိုတွန်၊ နျူထရွန်၊ အီလက်ထရွန်နှင့် အီလက်ထရွန်ခွံများကို 3D ဖြင့် လေ့လာမည်။", "en": "Protons, neutrons, electrons and electron shells, explored in 3D." },
+  "duration_min": 12,
+  "textbook_ref": { "catalog_id": "g10-chemistry-textbook-p1", "chapter": null, "pages": null },
+  "steps": [
+    { "type": "text", "title": { "my": "အက်တမ်ဆိုသည်မှာ", "en": "What is an atom?" },
+      "body": { "my": "ပစ္စည်းအားလုံးသည် အက်တမ်ခေါ် အလွန်သေးငယ်သော အမှုန်များဖြင့် ဖွဲ့စည်းထားသည်။ အက်တမ်တစ်ခု၏ အလယ်တွင် နျူကလိယပ် (nucleus) ရှိပြီး ၎င်းတွင် အပေါင်းလျှပ်စစ်ဓာတ်ရှိသော ပရိုတွန် (proton) များနှင့် လျှပ်စစ်ဓာတ်မဲ့ နျူထရွန် (neutron) များ ပါဝင်သည်။ အနုတ်လျှပ်စစ်ဓာတ်ရှိသော အီလက်ထရွန် (electron) များက နျူကလိယပ်ပတ်လည်ရှိ ခွံ (shell) များတွင် လှည့်ပတ်နေသည်။", "en": "All matter is made of tiny particles called atoms. At the centre is the nucleus, containing positively charged protons and neutral neutrons. Negatively charged electrons move around the nucleus in shells." } },
+    { "type": "video", "title": { "my": "ဗီဒီယို ရှင်းလင်းချက်", "en": "Video explainer" }, "url": null, "provider": "youtube" },
+    { "type": "scene", "title": { "my": "ကာဗွန် အက်တမ်", "en": "A carbon atom" }, "scene": "atom", "params": { "element": "C" },
+      "narration": { "my": "ကာဗွန် (C) အက်တမ်တွင် ပရိုတွန် ၆ ခု၊ နျူထရွန် ၆ ခု ရှိသည်။ အီလက်ထရွန် ၆ ခုကို ပထမခွံတွင် ၂ ခု၊ ဒုတိယခွံတွင် ၄ ခု စီစဉ်ထားသည် (2, 4)။ အနီရောင် = ပရိုတွန်၊ အပြာရောင် = နျူထရွန်၊ အဝါရောင် = အီလက်ထရွန်။ ဆွဲ၍ လှည့်ကြည့်ပါ။", "en": "A carbon atom has 6 protons and 6 neutrons. Its 6 electrons are arranged 2 in the first shell and 4 in the second (2, 4). Red = proton, blue = neutron, yellow = electron. Drag to rotate." } },
+    { "type": "quiz", "question": { "my": "ကာဗွန်အက်တမ်၏ အပြင်ဆုံးခွံတွင် အီလက်ထရွန် ဘယ်နှစ်ခု ရှိသနည်း။", "en": "How many electrons are in the outer shell of a carbon atom?" },
+      "choices": [ { "my": "၂ ခု", "en": "2" }, { "my": "၄ ခု", "en": "4" }, { "my": "၆ ခု", "en": "6" }, { "my": "၈ ခု", "en": "8" } ], "answer": 1,
+      "explain": { "my": "ကာဗွန်၏ အီလက်ထရွန်ဖွဲ့စည်းပုံမှာ 2, 4 ဖြစ်၍ အပြင်ဆုံးခွံတွင် ၄ ခု ရှိသည်။", "en": "Carbon's configuration is 2, 4 — four electrons in the outer shell." } },
+    { "type": "scene", "title": { "my": "ဆိုဒီယမ် အက်တမ်", "en": "A sodium atom" }, "scene": "atom", "params": { "element": "Na" },
+      "narration": { "my": "ဆိုဒီယမ် (Na) တွင် ပရိုတွန် ၁၁ ခု ရှိပြီး အီလက်ထရွန် ၁၁ ခုကို 2, 8, 1 ဟု စီစဉ်ထားသည်။ အပြင်ဆုံးခွံရှိ အီလက်ထရွန် ၁ ခုတည်းကြောင့် ဆိုဒီယမ်သည် ဓာတ်ပြုလွယ်သည်။", "en": "Sodium (Na) has 11 protons and its 11 electrons are arranged 2, 8, 1. The single outer electron is why sodium is so reactive." } },
+    { "type": "quiz", "question": { "my": "အောက်ပါတို့အနက် နျူကလိယပ်အတွင်း မရှိသည့် အမှုန်မှာ မည်သည်နည်း။", "en": "Which particle is NOT found in the nucleus?" },
+      "choices": [ { "my": "ပရိုတွန်", "en": "Proton" }, { "my": "နျူထရွန်", "en": "Neutron" }, { "my": "အီလက်ထရွန်", "en": "Electron" } ], "answer": 2,
+      "explain": { "my": "အီလက်ထရွန်များသည် နျူကလိယပ်ပတ်လည်ရှိ ခွံများတွင်သာ ရှိသည်။", "en": "Electrons occupy the shells around the nucleus." } },
+    { "type": "text", "title": { "my": "အနှစ်ချုပ်", "en": "Summary" },
+      "body": { "my": "• အက်တမ် = နျူကလိယပ် (ပရိုတွန် + နျူထရွန်) + အီလက်ထရွန်ခွံများ\n• ပရိုတွန်အရေအတွက် = အက်တမ်နံပါတ် (atomic number)\n• အီလက်ထရွန်များကို ခွံအလိုက် 2, 8, 8 … စီစဉ်သည်\n• အပြင်ဆုံးခွံရှိ အီလက်ထရွန်များက ဓာတ်ပြုမှုကို ဆုံးဖြတ်သည်", "en": "• Atom = nucleus (protons + neutrons) + electron shells\n• Number of protons = atomic number\n• Electrons fill shells 2, 8, 8 …\n• Outer-shell electrons decide how an element reacts" } }
+  ],
+  "contributors": ["BackBenchers Academy"],
+  "license": "CC-BY-4.0"
+}
