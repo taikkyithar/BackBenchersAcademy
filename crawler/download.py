@@ -91,8 +91,8 @@ def run(budget_gb: float | None = None, grades=None, kinds=None, include_off=Fal
     for e, fs in todo:
         if limit and n_ok >= limit:
             break
-        size = fs[0].get("bytes") or 0
-        if size and spent + size > budget:
+        size = fs[0].get("bytes") or (40 << 20)  # unknown size: assume 40 MB so the budget still holds
+        if spent + size > budget:
             n_skip += 1
             continue
         if free_bytes(DATA) - size < RESERVE_BYTES:
