@@ -1,5 +1,7 @@
 # BackBenchers Academy — မြန်မာ KG–12 အခမဲ့ 3D သင်ယူရေး
 
+**Live site:** https://thiha-lynn.github.io/BackBenchersAcademy/ · **Repo:** https://github.com/Thiha-Lynn/BackBenchersAcademy · License: code MIT, lessons CC BY 4.0
+
 > **Free, open, immersive learning for every child in Myanmar** — the national KG–Grade 12 curriculum as
 > 3D interactive lessons and video explainers, built on top of the official textbooks.
 >
