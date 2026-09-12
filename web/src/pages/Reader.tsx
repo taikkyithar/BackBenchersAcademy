@@ -33,6 +33,7 @@ export default function ReaderPage() {
 
   useEffect(() => {
     if (!doc || !canvas.current) return
+    let renderTask: pdfjsLib.RenderTask | null = null
     let cancelled = false
     doc.getPage(page).then(async (p) => {
       if (cancelled || !canvas.current) return
@@ -42,9 +43,17 @@ export default function ReaderPage() {
       const vp = p.getViewport({ scale })
       const c = canvas.current
       c.width = vp.width; c.height = vp.height; c.style.width = `${width}px`
-      await p.render({ canvasContext: c.getContext('2d')!, viewport: vp, canvas: c }).promise
+      renderTask = p.render({ canvasContext: c.getContext('2d')!, viewport: vp, canvas: c })
+      try {
+        await renderTask.promise
+      } catch (err: unknown) {
+        if ((err as { name?: string })?.name !== 'RenderingCancelledException') throw err
+      }
     })
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+      if (renderTask) renderTask.cancel()
+    }
   }, [doc, page])
 
   if (cat.error) return <div className="notice">{cat.error}</div>

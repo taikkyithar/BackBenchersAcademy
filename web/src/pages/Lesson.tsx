@@ -2,8 +2,9 @@ import { Suspense, lazy, useEffect, useState } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { loadLesson, useAsync, type LessonStep } from '../data/catalog'
 import { subjectInfo } from '../data/curriculum'
-const SceneOrFallback = lazy(() => import('../scenes').then((m) => ({ default: m.SceneOrFallback })))
 import { useT, num } from '../i18n'
+
+const SceneOrFallback = lazy(() => import('../scenes').then((m) => ({ default: m.SceneOrFallback })))
 
 function readProgress(id: string) { try { return Number(localStorage.getItem(`progress:${id}`) || 0) } catch { return 0 } }
 function writeProgress(id: string, i: number) { try { localStorage.setItem(`progress:${id}`, String(i)) } catch { /* ignore */ } }

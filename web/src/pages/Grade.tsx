@@ -28,7 +28,11 @@ export default function GradePage() {
       {cat.error && <div className="notice">{cat.error}</div>}
       {use3D && subjects.length > 0 && (
         <Suspense fallback={<div className="scene small" />}>
-          <Bookshelf hint={t('shelfHint')} books={subjects.map((s) => ({ id: s, color: subjectInfo(s).color, label: bi(subjectInfo(s)) }))} />
+          <Bookshelf
+            hint={t('shelfHint')}
+            books={subjects.map((s) => ({ id: s, color: subjectInfo(s).color, label: bi(subjectInfo(s)) }))}
+            onPick={(s) => nav(`/grade/${grade}/${s}`)}
+          />
         </Suspense>
       )}
       <h2>{t('chooseSubject')}</h2>

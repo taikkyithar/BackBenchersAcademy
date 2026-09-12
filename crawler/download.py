@@ -63,7 +63,7 @@ def fetch_one(e: dict, files: list[dict]) -> dict:
                 os.remove(dest)
                 raise RuntimeError("not a PDF (probably an HTML error page)")
             info = pdf_info(dest)
-            rec = {"id": e["id"], "path": os.path.relpath(dest, ROOT), "bytes": n, "sha256": sha256_file(dest),
+            rec = {"id": e["id"], "path": os.path.relpath(dest, ROOT).replace("\\", "/"), "bytes": n, "sha256": sha256_file(dest),
                    "source": f["source"], "url": f["url"], "original_filename": name, "downloaded_at": time.strftime("%Y-%m-%dT%H:%M:%SZ", time.gmtime()),
                    "seconds": round(time.time() - t0, 1), **info}
             return rec

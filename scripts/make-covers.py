@@ -3,7 +3,7 @@
 Covers are committed (≈15 KB each) so the deployed site is visual without hot-linking third-party images."""
 import json, os, subprocess, sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-m = json.load(open(os.path.join(ROOT, "data", "manifest.json")))["files"]
+m = json.load(open(os.path.join(ROOT, "data", "manifest.json"), encoding="utf-8"))["files"]
 out = os.path.join(ROOT, "data", "covers"); os.makedirs(out, exist_ok=True)
 n = 0
 for cid, rec in m.items():
