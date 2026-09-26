@@ -18,6 +18,11 @@ const en = {
   videoExplainer: 'Video explainer', scene3d: '3D scene', readingText: 'Reading', quiz: 'Quiz', progressSaved: 'Progress saved',
   textbookRef: 'In the textbook', min: 'min', videoWanted: 'No video yet for this step — record a 3–8 minute explainer in Burmese and add its link.',
   primary: 'Primary', middle: 'Middle', high: 'High school', books: 'books', offline: 'Works offline once loaded', twoD: '2D mode (low-end phones)',
+  search: 'Search', searchPlaceholder: 'Search chapters, lessons, textbooks… (e.g. အက်တမ်, ချိန်သီး, G10, အခန်း ၁)',
+  allResults: 'All', chaptersAndLessons: 'Chapters & Lessons', booksAndGuides: 'Books & Guides',
+  searchResults: 'Search results', noResultsFor: 'No results found for',
+  searchSuggestions: 'Try searching for a chapter title (e.g. "အက်တမ်၏ ဖွဲ့စည်းပုံ", "နေအဖွဲ့အစည်း"), subject ("ဓာတုဗေဒ", "Physics"), or chapter number ("အခန်း ၁").',
+  chapter: 'Chapter', filterByGrade: 'All grades', clear: 'Clear',
 }
 const my: typeof en = {
   appName: 'BackBenchers Academy',
@@ -34,6 +39,11 @@ const my: typeof en = {
   videoExplainer: 'ဗီဒီယို ရှင်းလင်းချက်', scene3d: '3D မြင်ကွင်း', readingText: 'ဖတ်စရာ', quiz: 'မေးခွန်း', progressSaved: 'တိုးတက်မှု သိမ်းဆည်းပြီး',
   textbookRef: 'ဖတ်စာအုပ်တွင်', min: 'မိနစ်', videoWanted: 'ဤအဆင့်အတွက် ဗီဒီယို မရှိသေးပါ — မြန်မာလို ၃–၈ မိနစ် ရှင်းလင်းချက် ရိုက်ကူးပြီး လင့်ခ်ထည့်ပေးပါ။',
   primary: 'မူလတန်း', middle: 'အလယ်တန်း', high: 'အထက်တန်း', books: 'စာအုပ်', offline: 'တစ်ကြိမ်ဖွင့်ပြီးလျှင် အင်တာနက်မရှိလည်း အလုပ်လုပ်သည်', twoD: '2D မုဒ် (ဖုန်းအဟောင်းများအတွက်)',
+  search: 'ရှာဖွေရန်', searchPlaceholder: 'အခန်းများ၊ သင်ခန်းစာများ၊ စာအုပ်များ ရှာဖွေပါ (ဥပမာ - အက်တမ်၊ ချိန်သီး၊ ၁၀ တန်း၊ အခန်း ၁)',
+  allResults: 'အားလုံး', chaptersAndLessons: 'အခန်းများနှင့် သင်ခန်းစာများ', booksAndGuides: 'ကျောင်းသုံးစာအုပ်များနှင့် လမ်းညွှန်များ',
+  searchResults: 'ရှာဖွေမှု ရလဒ်များ', noResultsFor: 'ရှာမတွေ့ပါ -',
+  searchSuggestions: 'အခန်းခေါင်းစဉ် (ဥပမာ "အက်တမ်၏ ဖွဲ့စည်းပုံ"၊ "နေအဖွဲ့အစည်း")၊ ဘာသာရပ် ("ဓာတုဗေဒ"၊ "ရူပဗေဒ") သို့မဟုတ် အခန်းနံပါတ် ("အခန်း ၁") ဖြင့် ရှာကြည့်ပါ။',
+  chapter: 'အခန်း', filterByGrade: 'အတန်း အားလုံး', clear: 'ရှင်းမည်',
 }
 export type Key = keyof typeof en
 const dict: Record<Lang, typeof en> = { en, my }

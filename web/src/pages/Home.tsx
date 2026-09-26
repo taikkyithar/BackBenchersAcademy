@@ -1,4 +1,4 @@
-import { Suspense, lazy } from 'react'
+import { Suspense, lazy, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { GRADES, LEVEL_COLOR, levelOf } from '../data/curriculum'
 import { useCatalog, useLessons } from '../data/catalog'
@@ -12,6 +12,17 @@ export default function Home() {
   const nav = useNavigate()
   const cat = useCatalog()
   const lessons = useLessons()
+  const [quickQuery, setQuickQuery] = useState('')
+
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault()
+    if (quickQuery.trim()) {
+      nav(`/search?q=${encodeURIComponent(quickQuery.trim())}`)
+    } else {
+      nav('/search')
+    }
+  }
+
   const label = (g: string) => (g === 'KG' ? t('kg') : `${t('grade')} ${num(g, lang)}`)
   const count = (g: string) => cat.data?.entries.filter((e) => e.grade === g).length ?? 0
   return (
@@ -19,6 +30,19 @@ export default function Home() {
       <section className="hero">
         <h1>{t('tagline')}</h1>
         <p>{cat.data ? `${num(cat.data.entries.length, lang)} ${t('books')} · ${num(lessons.data?.length ?? 0, lang)} ${t('lessons')} · ${t('offline')}` : t('loading')}</p>
+        <form className="home-search-form" onSubmit={handleSearchSubmit}>
+          <span className="home-search-icon">🔍</span>
+          <input
+            type="text"
+            className="home-search-input"
+            placeholder={t('searchPlaceholder')}
+            value={quickQuery}
+            onChange={(e) => setQuickQuery(e.target.value)}
+          />
+          <button type="submit" className="btn home-search-btn">
+            {t('search')}
+          </button>
+        </form>
       </section>
       {use3D && <Suspense fallback={<div className="scene" />}><Campus label={label} onPick={(g) => nav(`/grade/${g}`)} hint={t('home3dHint')} /></Suspense>}
       <h2>{t('chooseGrade')}</h2>

@@ -5,7 +5,7 @@
   "title": { "my": "နေအဖွဲ့အစည်း", "en": "The Solar System" },
   "summary": { "my": "နေနှင့် ဂြိုဟ်ကြီး ၈ လုံးကို 3D ဖြင့် လှည့်ပတ်ကြည့်မည်။", "en": "Fly around the Sun and the eight planets in 3D." },
   "duration_min": 10,
-  "textbook_ref": { "catalog_id": "g6-science-textbook", "chapter": null, "pages": null },
+  "textbook_ref": { "catalog_id": "g6-science-textbook", "chapter": "3", "pages": "25-38" },
   "steps": [
     { "type": "text", "title": { "my": "နေအဖွဲ့အစည်းဆိုသည်မှာ", "en": "What is the Solar System?" },
       "body": { "my": "နေအဖွဲ့အစည်းတွင် အလယ်ဗဟို၌ ကြယ်တစ်လုံးဖြစ်သော နေ ရှိပြီး ၎င်း၏ ဆွဲငင်အားကြောင့် ဂြိုဟ်ကြီး ၈ လုံး၊ ဂြိုဟ်ငယ်များ၊ ဥက္ကာပျံများနှင့် ကြယ်တံခွန်များ လှည့်ပတ်နေကြသည်။ နေနှင့် နီးသည့် အစီအစဉ်အတိုင်း — ဗုဒ္ဓဟူးဂြိုဟ်၊ သောကြာဂြိုဟ်၊ ကမ္ဘာ၊ အင်္ဂါဂြိုဟ်၊ ကြာသပတေးဂြိုဟ်၊ စနေဂြိုဟ်၊ ယူရေးနပ်စ်ဂြိုဟ်၊ နက်ပကျွန်းဂြိုဟ်။", "en": "The Solar System has the Sun, a star, at its centre. Its gravity keeps eight planets, dwarf planets, asteroids and comets in orbit. From the Sun outward: Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune." } },

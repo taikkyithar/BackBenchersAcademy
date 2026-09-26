@@ -5,7 +5,7 @@
   "title": { "my": "ရိုးရှင်းသော ချိန်သီး", "en": "The simple pendulum" },
   "summary": { "my": "ချိန်သီး၏ လွှဲကာလ (period) သည် ကြိုးအရှည်နှင့် ဆွဲငင်အားပေါ်တွင် မည်သို့ မူတည်သည်ကို လက်တွေ့စမ်းကြည့်မည်။", "en": "Experiment with how a pendulum's period depends on length and gravity." },
   "duration_min": 10,
-  "textbook_ref": { "catalog_id": "g10-physics-textbook-p1", "chapter": null, "pages": null },
+  "textbook_ref": { "catalog_id": "g10-physics-textbook-p1", "chapter": "5", "pages": "45-56" },
   "steps": [
     { "type": "text", "title": { "my": "လွှဲကာလ ဆိုသည်မှာ", "en": "What is the period?" },
       "body": { "my": "ကြိုးတစ်ချောင်း၏ အစွန်းတွင် အလေးတစ်ခုချိတ်၍ လွှဲလိုက်လျှင် ရိုးရှင်းသော ချိန်သီး ဖြစ်သည်။ တစ်ပတ်ပြည့် လွှဲရန် ကြာသောအချိန်ကို လွှဲကာလ T ဟု ခေါ်သည်။ ထောင့်ငယ်ငယ်ဖြင့် လွှဲပါက T = 2π√(L/g) ဖြစ်သည် — L သည် ကြိုးအရှည်၊ g သည် ဆွဲငင်အားအရှိန် (၉.၈ m/s²) ဖြစ်သည်။ အလေး၏ ဒြပ်ထုသည် T ကို မပြောင်းလဲစေပါ။", "en": "A mass hung on a string and set swinging is a simple pendulum. The time for one full swing is the period T. For small angles, T = 2π√(L/g), where L is the length and g the acceleration due to gravity (9.8 m/s²). The mass of the bob does not change T." } },

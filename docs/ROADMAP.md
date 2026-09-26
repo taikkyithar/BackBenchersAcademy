@@ -14,7 +14,7 @@
 - [x] PDF reader (pdf.js) with fallback to original link
 - [x] Lesson player: text · 3D scene · video · quiz, progress in localStorage
 - [x] PWA offline shell
-- [ ] Search (chapter titles, Burmese)
+- [x] Search (chapter titles, Burmese)
 - [ ] Downloadable "grade packs" for offline use (service worker + storage estimate)
 - [ ] Low-end profiling: 2 GB RAM Android, 3G; target < 1.5 MB first load without 3D
 - [ ] Deploy to GitHub Pages / Cloudflare Pages

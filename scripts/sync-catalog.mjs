@@ -33,10 +33,12 @@ const lessons = []
 for (const p of walk(join(root, 'content'))) {
   const l = JSON.parse(readFileSync(p, 'utf8'))
   for (const k of ['id', 'grade', 'subject', 'title', 'steps']) if (!(k in l)) throw new Error(`${p}: missing "${k}"`)
-  writeFileSync(join(out, 'lessons', `${l.id}.json`), JSON.stringify(l))
+  const step_titles = l.steps.map((s) => s.title).filter(Boolean)
   lessons.push({ id: l.id, grade: l.grade, subject: l.subject, title: l.title, summary: l.summary ?? null,
     duration_min: l.duration_min ?? null, steps: l.steps.length, has3d: l.steps.some((s) => s.type === 'scene'),
-    hasVideo: l.steps.some((s) => s.type === 'video' && s.url) })
+    hasVideo: l.steps.some((s) => s.type === 'video' && s.url),
+    textbook_ref: l.textbook_ref ?? null,
+    step_titles })
 }
 writeFileSync(join(out, 'lessons.json'), JSON.stringify(lessons))
 console.log(`synced ${entries.length} catalog entries and ${lessons.length} lessons → web/public/data`)

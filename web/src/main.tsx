@@ -10,6 +10,7 @@ const GradePage = lazy(() => import('./pages/Grade'))
 const SubjectPage = lazy(() => import('./pages/Subject'))
 const ReaderPage = lazy(() => import('./pages/Reader'))
 const LessonPage = lazy(() => import('./pages/Lesson'))
+const SearchPage = lazy(() => import('./pages/Search'))
 const wrap = (el: ReactNode) => <Suspense fallback={<div className="notice">…</div>}>{el}</Suspense>
 
 const router = createHashRouter([
@@ -17,6 +18,7 @@ const router = createHashRouter([
     path: '/', element: <App />,
     children: [
       { index: true, element: wrap(<Home />) },
+      { path: 'search', element: wrap(<SearchPage />) },
       { path: 'grade/:grade', element: wrap(<GradePage />) },
       { path: 'grade/:grade/:subject', element: wrap(<SubjectPage />) },
       { path: 'read/:id', element: wrap(<ReaderPage />) },

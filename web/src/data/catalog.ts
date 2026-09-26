@@ -18,7 +18,12 @@ export type Lesson = {
   textbook_ref?: { catalog_id?: string; chapter?: string | null; pages?: string | null }
   steps: LessonStep[]; contributors?: string[]; license?: string
 }
-export type LessonSummary = { id: string; grade: string; subject: string; title: Bi; summary: Bi | null; duration_min: number | null; steps: number; has3d: boolean; hasVideo: boolean }
+export type LessonSummary = {
+  id: string; grade: string; subject: string; title: Bi; summary: Bi | null; duration_min: number | null
+  steps: number; has3d: boolean; hasVideo: boolean
+  textbook_ref?: { catalog_id?: string; chapter?: string | null; pages?: string | null } | null
+  step_titles?: Bi[]
+}
 
 const base = import.meta.env.BASE_URL.replace(/\/$/, '')
 const cache = new Map<string, Promise<unknown>>()

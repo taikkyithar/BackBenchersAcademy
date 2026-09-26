@@ -5,7 +5,7 @@
   "title": { "my": "အက်တမ်၏ ဖွဲ့စည်းပုံ", "en": "Structure of the atom" },
   "summary": { "my": "ပရိုတွန်၊ နျူထရွန်၊ အီလက်ထရွန်နှင့် အီလက်ထရွန်ခွံများကို 3D ဖြင့် လေ့လာမည်။", "en": "Protons, neutrons, electrons and electron shells, explored in 3D." },
   "duration_min": 12,
-  "textbook_ref": { "catalog_id": "g10-chemistry-textbook-p1", "chapter": null, "pages": null },
+  "textbook_ref": { "catalog_id": "g10-chemistry-textbook-p1", "chapter": "1", "pages": "1-18" },
   "steps": [
     { "type": "text", "title": { "my": "အက်တမ်ဆိုသည်မှာ", "en": "What is an atom?" },
       "body": { "my": "ပစ္စည်းအားလုံးသည် အက်တမ်ခေါ် အလွန်သေးငယ်သော အမှုန်များဖြင့် ဖွဲ့စည်းထားသည်။ အက်တမ်တစ်ခု၏ အလယ်တွင် နျူကလိယပ် (nucleus) ရှိပြီး ၎င်းတွင် အပေါင်းလျှပ်စစ်ဓာတ်ရှိသော ပရိုတွန် (proton) များနှင့် လျှပ်စစ်ဓာတ်မဲ့ နျူထရွန် (neutron) များ ပါဝင်သည်။ အနုတ်လျှပ်စစ်ဓာတ်ရှိသော အီလက်ထရွန် (electron) များက နျူကလိယပ်ပတ်လည်ရှိ ခွံ (shell) များတွင် လှည့်ပတ်နေသည်။", "en": "All matter is made of tiny particles called atoms. At the centre is the nucleus, containing positively charged protons and neutral neutrons. Negatively charged electrons move around the nucleus in shells." } },
